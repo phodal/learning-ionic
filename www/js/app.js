@@ -68,11 +68,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
   .state('app.single', {
-    url: "/level/:playlistId",
+    url: "/level/:level",
     views: {
       'menuContent': {
         templateUrl: "templates/playlist.html",
-        controller: 'PlaylistCtrl'
+        controller: 'QuizCtrl'
       }
     }
   });
