@@ -1,6 +1,6 @@
 {
   "name": "learning-ionic",
-  "app_id": "",
+  "app_id": "428cc437",
   "gulpStartupTasks": [
     "sass",
     "watch"
