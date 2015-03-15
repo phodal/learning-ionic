@@ -36,7 +36,11 @@ angular.module('starter.controllers', ['starter.factory'])
   ];
 })
 
-.controller('QuizCtrl', function($scope, $stateParams) {
+.controller('QuizCtrl', function($scope, $stateParams, $http) {
+	var _this = this;
+	$http.get('assets/data/lv' + $stateParams.level + '.json').then(function(data) {
+		$scope.level_langeuages = data.data
+	});
 })
 
 .controller('WikiCtrl', function($scope, $stateParams) {

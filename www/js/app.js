@@ -71,7 +71,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: "/level/:level",
     views: {
       'menuContent': {
-        templateUrl: "templates/playlist.html",
+        templateUrl: "templates/level_quiz.html",
         controller: 'QuizCtrl'
       }
     }
