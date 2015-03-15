@@ -49,7 +49,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
   .state('app.language', {
-	  url: "/language/:playlistId",
+	  url: "/language/:languageId",
 	  views: {
 		  'menuContent': {
 			  templateUrl: "templates/wiki_detail.html",
