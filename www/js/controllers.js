@@ -28,7 +28,7 @@ angular.module('starter.controllers', ['starter.factory'])
 })
 
 .controller('LevelSelectCtrl', function($scope) {
-  $scope.playlists = [
+  $scope.levels = [
     { title: 'Level 1', id: 1 },
     { title: 'Level 2', id: 2 },
     { title: 'Level 3', id: 3 },
