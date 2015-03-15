@@ -37,9 +37,9 @@ angular.module('starter.controllers', ['starter.factory'])
 })
 
 .controller('QuizCtrl', function($scope, $stateParams, $http) {
-	var _this = this;
+	$scope.level = $stateParams.level;
 	$http.get('assets/data/lv' + $stateParams.level + '.json').then(function(data) {
-		$scope.level_langeuages = data.data
+		$scope.level_langeuages = data.data;
 	});
 })
 
