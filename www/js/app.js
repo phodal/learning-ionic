@@ -39,13 +39,23 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
-  .state('app.browse', {
-    url: "/browse",
+  .state('app.wiki', {
+    url: "/wiki",
     views: {
       'menuContent': {
-        templateUrl: "templates/browse.html"
+        templateUrl: "templates/wiki.html",
+        controller: 'WikiCtrl'
       }
     }
+  })
+  .state('app.language', {
+	  url: "/language/:playlistId",
+	  views: {
+		  'menuContent': {
+			  templateUrl: "templates/wiki_detail.html",
+			  controller: 'WikiDetailCtrl'
+		  }
+	  }
   })
     .state('app.playlists', {
       url: "/playlists",
