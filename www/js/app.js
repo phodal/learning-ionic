@@ -57,18 +57,18 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 		  }
 	  }
   })
-    .state('app.playlists', {
-      url: "/playlists",
+    .state('app.levelSelect', {
+      url: "/level",
       views: {
         'menuContent': {
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
+          templateUrl: "templates/level.html",
+          controller: 'LevelSelectCtrl'
         }
       }
     })
 
   .state('app.single', {
-    url: "/playlists/:playlistId",
+    url: "/level/:playlistId",
     views: {
       'menuContent': {
         templateUrl: "templates/playlist.html",
@@ -77,5 +77,5 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/level');
 });

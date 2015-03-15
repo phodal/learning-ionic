@@ -67,7 +67,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
+.controller('LevelSelectCtrl', function($scope) {
   $scope.playlists = [
     { title: 'Level 1', id: 1 },
     { title: 'Level 2', id: 2 },
