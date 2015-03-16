@@ -1,22 +1,32 @@
-<ion-view view-title="Level {{level}}">
+<ion-view view-title="Level {{level}} - Score: {{score}}" >
   <ion-content>
       <div class="quiz-area" ng-show="inProgress">
           <div ng-show="!quizOver">
               <h2 id="question">{{question}}</h2>
               <ul id="options">
-                  <li ng-repeat="option in options">
+                  <li ng-repeat="option in options" class="item-radio">
                       <label>
-                          <input type="radio" name="answer" value="{{option}}">
-                          {{option}}
+                          <label>
+                              <input type="radio" name="answer" value="{{option}}">
+                              <div class="item-content">
+                                  {{option}}
+                              </div>
+                              <!--<i class="radio-icon ion-checkmark"></i>-->
+                          </label>
                       </label>
                   </li>
               </ul>
-              <button ng-click="checkAnswer()" ng-show="answerMode">Submit</button>
+              <button ng-click="checkAnswer()" ng-show="answerMode" class="button button-positive">Submit</button>
 
               <div ng-show="!answerMode">
-                  <button ng-click="nextQuestion()" class="next-question">Next</button>
-                  <span ng-show="correctAns">That is correct!</span>
-                  <span ng-show="!correctAns">Sorry, that is an incorrect answer.</span>
+                  <span ng-show="correctAns">
+                      <button ng-click="nextQuestion()" class="next-question button button-balanced">Next</button>
+                      That is correct!
+                  </span>
+                  <span ng-show="!correctAns">
+                      <button ng-click="nextQuestion()" class="next-question button button-assertive" >Next</button>
+                      Sorry, that is an incorrect answer.
+                  </span>
               </div>
           </div>
 
@@ -24,24 +34,11 @@
               <h2>Quiz is over</h2>
               <button ng-click="reset()">Play again</button>
           </div>
-
-          <div id="score">
-              Score: {{score}}
-          </div>
       </div>
 
       <div class="intro" ng-show="!inProgress">
           <p>Welcome to the QuizApp</p>
-          <button id="startQuiz" ng-click="start()">Start the Quiz</button>
+          <button id="startQuiz" ng-click="start()" class="button button-positive">Start the Quiz</button>
       </div>
-      <!--<ion-item ng-repeat="language in level_langeuages" class=" item-radio">-->
-          <!--<label>-->
-              <!--<input type="radio" name="group">-->
-              <!--<div class="item-content">-->
-                  <!--{{language.language}}-->
-              <!--</div>-->
-              <!--<i class="radio-icon ion-checkmark"></i>-->
-          <!--</label>-->
-      <!--</ion-item>-->
   </ion-content>
 </ion-view>
