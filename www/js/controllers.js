@@ -43,13 +43,17 @@ angular.module('starter.controllers', ['starter.factory'])
 	});
 })
 
-.controller('WikiCtrl', function($scope, $stateParams) {
-	$scope.languages = [
-		{ title: 'dot', id: 1 },
-		{ title: 'others', id: 2 },
-		{ title: 'hello', id: 3 },
-		{ title: 'zero', id: 4 }
-	];
+.controller('WikiCtrl', function($scope, $stateParams, $http) {
+		$scope.level = $stateParams.level;
+		$http.get('assets/data/results.json').then(function(data) {
+			var results = [];
+			angular.forEach(data.data, function(each_level){
+				angular.forEach(each_level, function(each_language){
+					results.push(each_language)
+				});
+			});
+			$scope.languages = results;
+		});
 })
 
 .controller('WikiDetailCtrl', function($scope, $stateParams, quizFactory) {
