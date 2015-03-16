@@ -14,6 +14,8 @@
             [on-scroll-complete=""]
             [has-bouncing=""]
             [scroll-event-interval=""]>
-        <p style="white-space: pre;">{{hello_world}}</p>
+        <div ng-show="hello_world">
+            <div hljs source="hello_world"></div>
+        </div>
     </ion-content>
 </ion-view>
