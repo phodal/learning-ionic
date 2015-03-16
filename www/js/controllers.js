@@ -43,7 +43,6 @@ angular.module('starter.controllers', ['starter.factory', 'hljs'])
 })
 
 .controller('QuizCtrl', function($scope, $stateParams, $http, quizFactory) {
-
 	$scope.level = $stateParams.level;
 	$http.get('assets/data/lv' + $stateParams.level + '.json').then(function(data) {
 		$scope.level_langeuages = data.data;
@@ -62,7 +61,7 @@ angular.module('starter.controllers', ['starter.factory', 'hljs'])
 	};
 
 	$scope.getQuestion = function() {
-		var q = quizFactory.getQuestion($scope.id);
+		var q = quizFactory.getQuestion($scope.id, $scope.level);
 		if(q) {
 			$scope.question = q.question;
 			$scope.options = q.options;
@@ -129,5 +128,4 @@ angular.module('starter.controllers', ['starter.factory', 'hljs'])
 	$http.get('assets/'+  level + '/' + file_name).then(function(data) {
 		$scope.hello_world = data.data;
 	});
-	$scope.text =quizFactory.getQuestion($stateParams.languageId);
 });

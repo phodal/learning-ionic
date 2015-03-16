@@ -1,5 +1,9 @@
 var app = angular.module('starter.factory', [])
-.factory('quizFactory', function() {
+.factory('quizFactory', function($http) {
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min)) + min;
+	}
+
 	var questions = [
 		{
 			question: "Which is the largest country in the world by population?",
@@ -28,13 +32,18 @@ var app = angular.module('starter.factory', [])
 		}
 	];
 
-	return {
-		getQuestion: function(id) {
+	var getQuestion = function(id, level) {
+			$http.get('assets/data/lv' + level + '.json').then(function(data) {
+				console.log(data.data)
+			});
 			if(id < questions.length) {
 				return questions[id];
 			} else {
 				return false;
 			}
-		}
+		};
+
+	return {
+		getQuestion: getQuestion
 	};
 });
