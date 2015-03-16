@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['starter.factory', 'hljs'])
+angular.module('starter.controllers', ['starter.factory', 'hljs', 'starter.utils'])
 
 	.config(function (hljsServiceProvider) {
 	hljsServiceProvider.setOptions({
@@ -95,34 +95,26 @@ angular.module('starter.controllers', ['starter.factory', 'hljs'])
 	$scope.reset();
 })
 
-.controller('WikiCtrl', function($scope, $stateParams, $http) {
-		function capitalizeFirstLetter(string) {
-			return string.charAt(0).toUpperCase() + string.slice(1);
-		}
-
-		$scope.level = $stateParams.level;
-		$http.get('assets/data/results.json').then(function(data) {
-			var results = [];
-			angular.forEach(data.data, function(each_level){
-				angular.forEach(each_level, function(each_language){
-					var language = capitalizeFirstLetter(each_language.language.split('.')[0]);
-					angular.extend(each_language, {'language_name': language});
-					results.push(each_language)
-				});
+.controller('WikiCtrl', function($scope, $stateParams, $http, utilsFactory) {
+	$scope.level = $stateParams.level;
+	$http.get('assets/data/results.json').then(function(data) {
+		var results = [];
+		angular.forEach(data.data, function(each_level){
+			angular.forEach(each_level, function(each_language){
+				var language = utilsFactory.capitalizeFirstLetter(each_language.language.split('.')[0]);
+				angular.extend(each_language, {'language_name': language});
+				results.push(each_language)
 			});
-			$scope.languages = results;
 		});
+		$scope.languages = results;
+	});
 })
 
-.controller('WikiDetailCtrl', function($scope, $stateParams, quizFactory, $http) {
-	function capitalizeFirstLetter(string) {
-		return string.charAt(0).toUpperCase() + string.slice(1);
-	}
-
+.controller('WikiDetailCtrl', function($scope, $stateParams, quizFactory, $http, utilsFactory) {
 	var language_info = $stateParams.language_info.split("+"),
 	level = language_info[0],
 	file_name = language_info[1],
-	language = capitalizeFirstLetter(file_name.split('.')[0]);
+	language = utilsFactory.capitalizeFirstLetter(file_name.split('.')[0]);
 
 	$scope.language = language;
 	$http.get('assets/'+  level + '/' + file_name).then(function(data) {

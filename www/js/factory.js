@@ -1,5 +1,5 @@
 var app = angular.module('starter.factory', [])
-.factory('quizFactory', function() {
+.factory('quizFactory', function($http) {
 	function getRandomInt(min, max) {
 		return Math.floor(Math.random() * (max - min)) + min;
 	}
