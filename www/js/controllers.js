@@ -50,11 +50,17 @@ angular.module('starter.controllers', ['starter.factory', 'hljs'])
 })
 
 .controller('WikiCtrl', function($scope, $stateParams, $http) {
+		function capitalizeFirstLetter(string) {
+			return string.charAt(0).toUpperCase() + string.slice(1);
+		}
+
 		$scope.level = $stateParams.level;
 		$http.get('assets/data/results.json').then(function(data) {
 			var results = [];
 			angular.forEach(data.data, function(each_level){
 				angular.forEach(each_level, function(each_language){
+					var language = capitalizeFirstLetter(each_language.language.split('.')[0]);
+					angular.extend(each_language, {'language_name': language});
 					results.push(each_language)
 				});
 			});
