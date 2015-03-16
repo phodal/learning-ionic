@@ -56,6 +56,13 @@ angular.module('starter.controllers', ['starter.factory'])
 		});
 })
 
-.controller('WikiDetailCtrl', function($scope, $stateParams, quizFactory) {
+.controller('WikiDetailCtrl', function($scope, $stateParams, quizFactory, $http) {
+		var language_info = $stateParams.language_info.split("+");
+		console.log(language_info);
+	var	level = language_info[0],
+		file_name = language_info[1];
+	$http.get('assets/'+  level + '/' + file_name).then(function(data) {
+		$scope.hello_world = data.data;
+	});
 	$scope.text =quizFactory.getQuestion($stateParams.languageId);
 });
