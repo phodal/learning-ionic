@@ -4,21 +4,21 @@
           <div ng-show="!quizOver">
               <h2 id="question">{{question}}</h2>
               <ul id="options">
-                  <li ng-repeat="option in options" class="item-radio">
+                  <li ng-repeat="option in options" class="item item-radio">
                       <label>
                           <label>
                               <input type="radio" name="answer" value="{{option}}">
                               <div class="item-content">
                                   {{option}}
                               </div>
-                              <!--<i class="radio-icon ion-checkmark"></i>-->
+                              <i class="radio-icon ion-checkmark"></i>
                           </label>
                       </label>
                   </li>
               </ul>
               <button ng-click="checkAnswer()" ng-show="answerMode" class="button button-positive">Submit</button>
 
-              <div ng-show="!answerMode">
+              <div ng-show="!answerMode" class="bar bar-footer">
                   <span ng-show="correctAns">
                       <button ng-click="nextQuestion()" class="next-question button button-balanced">Next</button>
                       That is correct!
@@ -35,7 +35,6 @@
               <button ng-click="reset()">Play again</button>
           </div>
       </div>
-
       <div class="intro" ng-show="!inProgress">
           <p>Welcome to the QuizApp</p>
           <button id="startQuiz" ng-click="start()" class="button button-positive">Start the Quiz</button>
