@@ -57,10 +57,16 @@ angular.module('starter.controllers', ['starter.factory'])
 })
 
 .controller('WikiDetailCtrl', function($scope, $stateParams, quizFactory, $http) {
-		var language_info = $stateParams.language_info.split("+");
-		console.log(language_info);
-	var	level = language_info[0],
-		file_name = language_info[1];
+	function capitalizeFirstLetter(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
+	var language_info = $stateParams.language_info.split("+"),
+	level = language_info[0],
+	file_name = language_info[1],
+	language = capitalizeFirstLetter(file_name.split('.')[0]);
+
+	$scope.language = language;
 	$http.get('assets/'+  level + '/' + file_name).then(function(data) {
 		$scope.hello_world = data.data;
 	});
