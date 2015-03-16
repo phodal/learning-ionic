@@ -60,59 +60,18 @@ angular.module('starter.controllers', ['starter.factory', 'hljs', 'starter.utils
 	};
 
 	$scope.getQuestion = function() {
-		function getRandomInt(max) {
-			var min = 0;
-			return Math.floor(Math.random() * (max - min)) + min;
-		}
-
-		function getRandomIntWithout(max, without) {
-			var min = 0;
-			while(true){
-				var random = Math.floor(Math.random() * (max - min)) + min;
-				if(random !== without) {
-					return random;
-				}
-			}
-		}
-
-		function getRandomIntWithoutArray(max, without) {
-			console.log(without);
-			var min = 0;
-			while(true){
-				var random = Math.floor(Math.random() * (max - min)) + min;
-				if(random !== without[0] && random !== without[1]) {
-					console.log(random);
-					return random;
-				}
-			}
-		}
-
-		var language_id = getRandomInt($scope.level_langeuages.length);
+		var language_id = utilsFactory.getRandomInt($scope.level_langeuages.length);
 		var correct_language = $scope.level_langeuages[language_id].language;
 
 		quizFactory.myService.async('lv' + $scope.level, correct_language).then(function(data) {
 			$scope.data = data;
 		}).then(function(){
-			var firstLanguage_id = getRandomIntWithout($scope.level_langeuages.length, language_id);
+			var firstLanguage_id = utilsFactory.getRandomIntWithout($scope.level_langeuages.length, language_id);
 			var firstLanguage = $scope.level_langeuages[firstLanguage_id].language;
-			var secondLanguage_id = getRandomIntWithoutArray($scope.level_langeuages.length, [firstLanguage_id, language_id]);
+			var secondLanguage_id = utilsFactory.getRandomIntWithoutArray($scope.level_langeuages.length, [firstLanguage_id, language_id]);
 			var secondLanguage = $scope.level_langeuages[secondLanguage_id].language;
 
-			function shuffle(array) {
-				console.log(array);
-				var currentIndex = array.length, temporaryValue, randomIndex ;
-				while (0 !== currentIndex) {
-					randomIndex = Math.floor(Math.random() * currentIndex);
-					currentIndex -= 1;
-					temporaryValue = array[currentIndex];
-					array[currentIndex] = array[randomIndex];
-					array[randomIndex] = temporaryValue;
-				}
-
-				return array;
-			}
-
-			var options_language = shuffle([firstLanguage, correct_language, secondLanguage]);
+			var options_language = utilsFactory.shuffle([firstLanguage, correct_language, secondLanguage]);
 			$scope.answer = -1;
 			angular.forEach(options_language, function(language, index){
 				if(language === correct_language) {
@@ -124,7 +83,6 @@ angular.module('starter.controllers', ['starter.factory', 'hljs', 'starter.utils
 				options: options_language,
 				answer: $scope.answer
 			};
-			console.log(q.options);
 			if(q) {
 				$scope.question = q.question;
 				$scope.options = q.options;
