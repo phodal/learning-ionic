@@ -42,11 +42,58 @@ angular.module('starter.controllers', ['starter.factory', 'hljs'])
   ];
 })
 
-.controller('QuizCtrl', function($scope, $stateParams, $http) {
+.controller('QuizCtrl', function($scope, $stateParams, $http, quizFactory) {
+
 	$scope.level = $stateParams.level;
 	$http.get('assets/data/lv' + $stateParams.level + '.json').then(function(data) {
 		$scope.level_langeuages = data.data;
 	});
+
+	$scope.start = function() {
+		$scope.id = 0;
+		//$scope.quizOver = true;
+		$scope.inProgress = true;
+		$scope.getQuestion();
+	};
+
+	$scope.reset = function() {
+		$scope.inProgress = false;
+		$scope.score = 0;
+	};
+
+	$scope.getQuestion = function() {
+		var q = quizFactory.getQuestion($scope.id);
+		if(q) {
+			$scope.question = q.question;
+			$scope.options = q.options;
+			$scope.answer = q.answer;
+			$scope.answerMode = true;
+		} else {
+			$scope.quizOver = true;
+		}
+	};
+
+	$scope.checkAnswer = function() {
+		if(!$('input[name=answer]:checked').length) return;
+
+		var ans = $('input[name=answer]:checked').val();
+
+		if(ans == $scope.options[$scope.answer]) {
+			$scope.score++;
+			$scope.correctAns = true;
+		} else {
+			$scope.correctAns = false;
+		}
+
+		$scope.answerMode = false;
+	};
+
+	$scope.nextQuestion = function() {
+		$scope.id++;
+		$scope.getQuestion();
+	};
+
+	$scope.reset();
 })
 
 .controller('WikiCtrl', function($scope, $stateParams, $http) {

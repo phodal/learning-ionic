@@ -1,4 +1,4 @@
-angular.module('starter.factory', [])
+var app = angular.module('starter.factory', [])
 .factory('quizFactory', function() {
 	var questions = [
 		{
