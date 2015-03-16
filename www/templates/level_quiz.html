@@ -1,4 +1,4 @@
-<ion-view view-title="Level {{level}} - Score: {{score}}" >
+<ion-view view-title="难度 {{level}} - 分数: {{score}}" >
   <ion-content>
       <div class="quiz-area" ng-show="inProgress">
           <div ng-show="!quizOver">
@@ -27,11 +27,11 @@
               <div ng-show="!answerMode">
                   <span ng-show="correctAns">
                       <button ng-click="nextQuestion()" class="next-question button button-full button-balanced">下一题</button>
-                      That is correct!
+                      <i class="ion-checkmark"></i> 回答正确!
                   </span>
                   <span ng-show="!correctAns">
                       <button ng-click="nextQuestion()" class="next-question button button-full button-assertive" >下一题</button>
-                      Sorry, that is an incorrect answer.
+                      <i class="ion-sad"></i> 答错了~~
                   </span>
               </div>
           </div>
