@@ -1,9 +1,5 @@
 var app = angular.module('starter.factory', [])
-.factory('quizFactory', function($http) {
-	function getRandomInt(min, max) {
-		return Math.floor(Math.random() * (max - min)) + min;
-	}
-
+.factory('quizFactory', function($http, $q) {
 	function generateQuestion(data){
 		function capitalizeFirstLetter(string) {
 			return string.charAt(0).toUpperCase() + string.slice(1);
@@ -20,6 +16,19 @@ var app = angular.module('starter.factory', [])
 		return question;
 	}
 
+	var myService = {
+		async: function(level, file_name) {
+			var def = $q.defer();
+			$http.get('assets/' + level + '/' + file_name)
+				.success(function (response) {
+					def.resolve(response);
+				}).error(function () {
+					def.reject("Failed to get albums");
+				});
+			return def.promise;
+		}
+	};
+
 	var getQuestion = function (id, data) {
 		var questions = data;
 		var question = generateQuestion(data);
@@ -32,6 +41,7 @@ var app = angular.module('starter.factory', [])
 	};
 
 	return {
-		getQuestion: getQuestion
+		getQuestion: getQuestion,
+		myService: myService
 	};
 });

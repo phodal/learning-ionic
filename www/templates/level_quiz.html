@@ -2,7 +2,13 @@
   <ion-content>
       <div class="quiz-area" ng-show="inProgress">
           <div ng-show="!quizOver">
-              <h2 id="question">{{question}}</h2>
+              <div class="row">
+                  <div class="col">
+                      <div ng-show="question">
+                          <div hljs source="question"></div>
+                      </div>
+                  </div>
+              </div>
               <ul id="options">
                   <li ng-repeat="option in options" class="item item-radio">
                       <label>
@@ -16,15 +22,15 @@
                       </label>
                   </li>
               </ul>
-              <button ng-click="checkAnswer()" ng-show="answerMode" class="button button-positive">Submit</button>
+              <button ng-click="checkAnswer()" ng-show="answerMode" class="button button-full button-positive">确认</button>
 
               <div ng-show="!answerMode">
                   <span ng-show="correctAns">
-                      <button ng-click="nextQuestion()" class="next-question button button-balanced">Next</button>
+                      <button ng-click="nextQuestion()" class="next-question button button-full button-balanced">下一题</button>
                       That is correct!
                   </span>
                   <span ng-show="!correctAns">
-                      <button ng-click="nextQuestion()" class="next-question button button-assertive" >Next</button>
+                      <button ng-click="nextQuestion()" class="next-question button button-full button-assertive" >下一题</button>
                       Sorry, that is an incorrect answer.
                   </span>
               </div>
@@ -36,8 +42,7 @@
           </div>
       </div>
       <div class="intro" ng-show="!inProgress">
-          <p>Welcome to the QuizApp</p>
-          <button id="startQuiz" ng-click="start()" class="button button-positive">Start the Quiz</button>
+          <button id="startQuiz" ng-click="start()" class="button button-full button-positive">开始答题</button>
       </div>
   </ion-content>
 </ion-view>

@@ -7,7 +7,6 @@ angular.module('starter.controllers', ['starter.factory', 'hljs', 'starter.utils
 	});
 })
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
-  // Form data for the login modal
   $scope.loginData = {};
 
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -42,7 +41,7 @@ angular.module('starter.controllers', ['starter.factory', 'hljs', 'starter.utils
   ];
 })
 
-.controller('QuizCtrl', function($scope, $stateParams, $http, quizFactory) {
+.controller('QuizCtrl', function($scope, $stateParams, $http, quizFactory, utilsFactory) {
 	$scope.level = $stateParams.level;
 	$http.get('assets/data/lv' + $stateParams.level + '.json').then(function(data) {
 		$scope.level_langeuages = data.data;
@@ -61,22 +60,85 @@ angular.module('starter.controllers', ['starter.factory', 'hljs', 'starter.utils
 	};
 
 	$scope.getQuestion = function() {
-		var q = quizFactory.getQuestion($scope.id, $scope.level_langeuages);
-		if(q) {
-			$scope.question = q.question;
-			$scope.options = q.options;
-			$scope.answer = q.answer;
-			$scope.answerMode = true;
-		} else {
-			$scope.quizOver = true;
+		function getRandomInt(max) {
+			var min = 0;
+			return Math.floor(Math.random() * (max - min)) + min;
 		}
+
+		function getRandomIntWithout(max, without) {
+			var min = 0;
+			while(true){
+				var random = Math.floor(Math.random() * (max - min)) + min;
+				if(random !== without) {
+					return random;
+				}
+			}
+		}
+
+		function getRandomIntWithoutArray(max, without) {
+			console.log(without);
+			var min = 0;
+			while(true){
+				var random = Math.floor(Math.random() * (max - min)) + min;
+				if(random !== without[0] && random !== without[1]) {
+					console.log(random);
+					return random;
+				}
+			}
+		}
+
+		var language_id = getRandomInt($scope.level_langeuages.length);
+		var correct_language = $scope.level_langeuages[language_id].language;
+
+		quizFactory.myService.async('lv' + $scope.level, correct_language).then(function(data) {
+			$scope.data = data;
+		}).then(function(){
+			var firstLanguage_id = getRandomIntWithout($scope.level_langeuages.length, language_id);
+			var firstLanguage = $scope.level_langeuages[firstLanguage_id].language;
+			var secondLanguage_id = getRandomIntWithoutArray($scope.level_langeuages.length, [firstLanguage_id, language_id]);
+			var secondLanguage = $scope.level_langeuages[secondLanguage_id].language;
+
+			function shuffle(array) {
+				console.log(array);
+				var currentIndex = array.length, temporaryValue, randomIndex ;
+				while (0 !== currentIndex) {
+					randomIndex = Math.floor(Math.random() * currentIndex);
+					currentIndex -= 1;
+					temporaryValue = array[currentIndex];
+					array[currentIndex] = array[randomIndex];
+					array[randomIndex] = temporaryValue;
+				}
+
+				return array;
+			}
+
+			var options_language = shuffle([firstLanguage, correct_language, secondLanguage]);
+			$scope.answer = -1;
+			angular.forEach(options_language, function(language, index){
+				if(language === correct_language) {
+					$scope.answer = index;
+				}
+			});
+			var q = {
+				question: $scope.data,
+				options: options_language,
+				answer: $scope.answer
+			};
+			console.log(q.options);
+			if(q) {
+				$scope.question = q.question;
+				$scope.options = q.options;
+				$scope.answer = q.answer;
+				$scope.answerMode = true;
+			} else {
+				$scope.quizOver = true;
+			}
+		});
 	};
 
 	$scope.checkAnswer = function() {
 		if(!$('input[name=answer]:checked').length) return;
-
 		var ans = $('input[name=answer]:checked').val();
-
 		if(ans == $scope.options[$scope.answer]) {
 			$scope.score++;
 			$scope.correctAns = true;
