@@ -61,7 +61,7 @@ angular.module('starter.controllers', ['starter.factory', 'hljs'])
 	};
 
 	$scope.getQuestion = function() {
-		var q = quizFactory.getQuestion($scope.id, $scope.level);
+		var q = quizFactory.getQuestion($scope.id, $scope.level_langeuages);
 		if(q) {
 			$scope.question = q.question;
 			$scope.options = q.options;
