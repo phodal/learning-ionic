@@ -1,7 +1,13 @@
 <ion-view view-title="Level {{level}}">
   <ion-content>
-      <ion-item ng-repeat="language in level_langeuages">
-          {{language.language}}
+      <ion-item ng-repeat="language in level_langeuages" class=" item-radio">
+          <label>
+              <input type="radio" name="group">
+              <div class="item-content">
+                  {{language.language}}
+              </div>
+              <i class="radio-icon ion-checkmark"></i>
+          </label>
       </ion-item>
   </ion-content>
 </ion-view>
