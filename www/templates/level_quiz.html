@@ -32,6 +32,8 @@
                   <span ng-show="!correctAns">
                       <button ng-click="nextQuestion()" class="next-question button button-full button-assertive" >下一题</button>
                       <i class="ion-sad"></i> 答错了~~
+                      正确答案是: {{correct_language}}<a href="#/app/language/{{wiki_url}}">了解一下{{correct_language}}</a>
+
                   </span>
               </div>
           </div>
