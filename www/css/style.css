@@ -6,3 +6,8 @@
 code, kbd, pre, samp {
     font-family: Inconsolata;
 }
+
+.tips {
+    display: block;
+    margin:auto 0;
+}
