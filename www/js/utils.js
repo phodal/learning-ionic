@@ -1,9 +1,5 @@
 var app = angular.module('starter.utils', [])
 .factory('utilsFactory', function() {
-	function capitalizeFirstLetter(string) {
-		return string.charAt(0).toUpperCase() + string.slice(1);
-	}
-
 		function getRandomInt(max) {
 			var min = 0;
 			return Math.floor(Math.random() * (max - min)) + min;
@@ -24,7 +20,6 @@ var app = angular.module('starter.utils', [])
 			while(true){
 				var random = Math.floor(Math.random() * (max - min)) + min;
 				if(random !== without[0] && random !== without[1]) {
-					console.log(random);
 					return random;
 				}
 			}
@@ -47,7 +42,6 @@ var app = angular.module('starter.utils', [])
 		getRandomInt: getRandomInt,
 		getRandomIntWithout: getRandomIntWithout,
 		getRandomIntWithoutArray: getRandomIntWithoutArray,
-		shuffle: shuffle,
-		capitalizeFirstLetter: capitalizeFirstLetter
+		shuffle: shuffle
 	};
 });

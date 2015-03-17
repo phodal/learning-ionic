@@ -46,10 +46,10 @@ angular.module('starter.controllers', ['starter.factory', 'hljs', 'starter.utils
 			var secondLanguage_id = utilsFactory.getRandomIntWithoutArray($scope.level_langeuages.length, [firstLanguage_id, language_id]);
 			var secondLanguage = $scope.level_langeuages[secondLanguage_id].language;
 
-			var options_language = utilsFactory.shuffle([firstLanguage, correct_language, secondLanguage]);
+			var options_language = utilsFactory.shuffle([firstLanguage.split('.')[0], correct_language.split('.')[0], secondLanguage.split('.')[0]]);
 			$scope.answer = -1;
 			angular.forEach(options_language, function(language, index){
-				if(language === correct_language) {
+				if(language === correct_language.split('.')[0]) {
 					$scope.answer = index;
 				}
 			});
@@ -98,7 +98,7 @@ angular.module('starter.controllers', ['starter.factory', 'hljs', 'starter.utils
 		var results = [];
 		angular.forEach(data.data, function(each_level){
 			angular.forEach(each_level, function(each_language){
-				var language = utilsFactory.capitalizeFirstLetter(each_language.language.split('.')[0]);
+				var language =each_language.language.split('.')[0];
 				angular.extend(each_language, {'language_name': language});
 				results.push(each_language)
 			});
@@ -111,7 +111,7 @@ angular.module('starter.controllers', ['starter.factory', 'hljs', 'starter.utils
 	var language_info = $stateParams.language_info.split("+"),
 	level = language_info[0],
 	file_name = language_info[1],
-	language = utilsFactory.capitalizeFirstLetter(file_name.split('.')[0]);
+	language =file_name.split('.')[0];
 
 	$scope.language = language;
 	$http.get('assets/'+  level + '/' + file_name).then(function(data) {
