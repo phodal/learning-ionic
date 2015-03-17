@@ -114,6 +114,8 @@ angular.module('starter.controllers', ['starter.factory', 'hljs', 'starter.utils
 	language =file_name.split('.')[0];
 
 	$scope.language = language;
+	$scope.md ='assets/intro/' + language + '.md';
+
 	$http.get('assets/'+  level + '/' + file_name).then(function(data) {
 		$scope.hello_world = data.data;
 	});
