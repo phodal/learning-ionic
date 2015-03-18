@@ -64,7 +64,7 @@ angular.module('starter.controllers', ['starter.factory', 'hljs', 'starter.utils
 				$scope.answer = q.answer;
 				$scope.answerMode = true;
 				$scope.wiki_url = 'lv' + $stateParams.level + '+' + correct_language;
-				$scope.correct_language = correct_language;
+				$scope.correct_language = correct_language.split('.')[0];
 			} else {
 				$scope.quizOver = true;
 			}
