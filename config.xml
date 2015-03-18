@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.learningionic860614" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>learning-ionic</name>
+  <name>程序语言答人</name>
   <description>
-        An Ionic Framework and Cordova project.
+      你了解多少种计算机语言？你认识这些戴着不同面具的Hello World吗？你想证明自己是程序语言达人吗？那就来答一答～
+      专为程序猿量身打造，全面的语言百科，趣味的问答小游戏，茶余饭后，夜深人静，请来一打 Hello World ，不用客气！
     </description>
   <author email="h@phodal.com" href="http://www.phodal.com/">
-      Team
+      Phodal Huang
     </author>
   <content src="index.html"/>
   <access origin="*"/>
