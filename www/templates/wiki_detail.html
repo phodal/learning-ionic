@@ -16,10 +16,17 @@
             [scroll-event-interval=""]>
         <div class="row">
             <div class="col">
-                <div marked ng-include="md"></div>
+                <h3>简介</h3>
+                <div class="card">
+                    <div class="item item-text-wrap">
+                        <div marked ng-include="md"></div>
+                    </div>
+                </div>
                 <h3>Hello World代码</h3>
-                <div ng-show="hello_world">
-                    <div hljs source="hello_world"></div>
+                <div class="card">
+                    <div ng-show="hello_world">
+                        <div hljs source="hello_world"></div>
+                    </div>
                 </div>
             </div>
         </div>
