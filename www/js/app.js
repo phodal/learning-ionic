@@ -6,10 +6,29 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'hc.marked'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $ionicPopup) {
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
+	  if(window.plugins && window.plugins.AdMob) {
+		  var admob_key = device.platform == "Android" ? "ANDROID_PUBLISHER_KEY" : "IOS_PUBLISHER_KEY";
+		  var admob = window.plugins.AdMob;
+		  admob.createBannerView(
+			  {
+				  'publisherId': 'ca-app-pub-3662578183051823/5276849408',
+				  'adSize': admob.AD_SIZE.BANNER,
+				  'bannerAtTop': false
+			  },
+			  function() {
+				  admob.requestAd(
+					  { 'isTesting': false },
+					  function() {
+						  admob.showAd(true);
+					  },
+					  function() { console.log('failed to request ad'); }
+				  );
+			  },
+			  function() { console.log('failed to create banner view'); }
+		  );
+	  }
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
