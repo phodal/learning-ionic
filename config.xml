@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.learningionic860614" version="0.1.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" versionCode = "301" >
+<widget id="com.ionicframework.learningionic860614" version="0.1.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" versionCode="301">
   <name>程序语言答人</name>
   <description>
       你了解多少种计算机语言？你认识这些戴着不同面具的Hello World吗？你想证明自己是程序语言达人吗？那就来答一答～
@@ -65,6 +65,11 @@
     <splash src="resources/ios/splash/Default-Portrait~ipad.png" width="768" height="1024"/>
     <splash src="resources/ios/splash/Default@2x~iphone.png" width="640" height="960"/>
     <splash src="resources/ios/splash/Default~iphone.png" width="320" height="480"/>
+  </platform>
+  <platform name="wp8">
+    <icon src="resources\wp8\icon\ApplicationIcon.png" width="99" height="99"/>
+    <icon src="resources\wp8\icon\Background.png" width="159" height="159"/>
+    <splash src="resources\wp8\splash\SplashScreenImage.png" width="768" height="1280"/>
   </platform>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
 </widget>
