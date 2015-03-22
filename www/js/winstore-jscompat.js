@@ -153,15 +153,19 @@
                     }
                 },
                 enumerable: propertyDescriptor.enumerable,
-                configurable: propertyDescriptor.configurable,
+                configurable: propertyDescriptor.configurable
             });
         }
-        cleansePropertySetter("innerHTML", function (propertyDescriptor, target, elements) {
-            empty(target);
-            for (var i = 0, len = elements.length; i < len; i++) {
-                target.appendChild(elements[i]);
-            }
-        });
+	    cleansePropertySetter("innerHTML", function (propertyDescriptor, target, elements) {
+		    empty(target);
+		    for (var elementIndex = 0, elementsLength = elements.length; elementIndex < elementsLength; elementIndex++) {
+			    if (elements[elementIndex].nodeName == 'BODY') {
+				    for (var childIndex = 0, amountOfChildren = elements[elementIndex].childNodes.length; childIndex < amountOfChildren; childIndex++) {
+					    target.appendChild(elements[elementIndex].childNodes[0]);
+				    }
+			    }
+		    }
+	    });
         cleansePropertySetter("outerHTML", function (propertyDescriptor, target, elements) {
             for (var i = 0, len = elements.length; i < len; i++) {
                 target.insertAdjacentElement("afterend", elements[i]);
