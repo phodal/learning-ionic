@@ -8,6 +8,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'hc.marked'])
 
 .run(function($ionicPlatform, $ionicPopup) {
   $ionicPlatform.ready(function() {
+	  if (typeof analytics !== 'undefined'){
+		  analytics.startTrackerWithId('UA-60917659-1');
+		  analytics.trackView('Screen Title')
+	  }
 	  if(window.plugins && window.plugins.AdMob) {
 		  var admob_key = device.platform == "Android" ? "ANDROID_PUBLISHER_KEY" : "IOS_PUBLISHER_KEY";
 		  var admob = window.plugins.AdMob;
