@@ -16,5 +16,6 @@
   },
   "cordovaPlugins": [
     "org.apache.cordova.inappbrowser"
-  ]
+  ],
+  "cordovaPlatforms": []
 }
